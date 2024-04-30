@@ -1,0 +1,183 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SparrowManagementSystem.Core.Entities
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - SparrowManagementSystem.Ui</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SparrowManagementSystem.Ui.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-------------------------Font Awesome Icons --------------->
+    <script src="https://kit.fontawesome.com/dad03e859c.js" crossorigin="anonymous"></script>
+    <!----------x---------------Font Awesome Icons --------x------->
+    <!----------x---------------Google font --------x------->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alkatra&family=Berkshire+Swash&family=Comic+Neue:wght@700&family=Gentium+Book+Plus:wght@400;700&family=Lato:ital,wght@0,400;0,700;0,900;1,700&family=Lexend+Deca:wght@500&family=Lexend:wght@500&family=Montserrat:wght@500&family=Open+Sans:wght@500;800&family=Roboto:wght@100;400&family=Sue+Ellen+Francisco&family=Work+Sans:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Datatable -->
+    <link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <!-- End Datatable -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="~/images/favicons/site.webmanifest">
+    <link rel="mask-icon" href="~/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="~/images/favicons/favicon.ico">
+
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	
+    <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900;&display:swap">
+</head>
+<body>
+
+    <section id="header">
+            <a href="/"><img src="https://i.postimg.cc/x8ncvFjr/logo.png"></a>
+            <div>
+            <div>
+                <ul id="navbar">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="/Shop/">Shop</a></li>
+                        @if(User.IsInRole(UserRole.Role_User_Admin))
+                        {
+                            <li><a href="/Home/HomeTheme">Home Theme</a></li>
+                            <li><a href="/Product/">Product</a></li>
+                            <li><a href="/Category/">Category</a></li>
+                            <li><a href="/Material/">Material</a></li>
+
+                        }
+
+                        <li><a href="/Order/">Order</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li>
+                            <a href="/Cart/" id="lg-bag"><i class="fal fa-shopping-bag"></i></a>
+                            <span class="quantity">@ViewBag.itemsInCart</span>
+                        </li>
+
+
+                        <li><a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a> </li>
+                        <li>
+                            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        </li>
+                        <li>
+                            <a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                    }
+                </ul>
+                <div id="mobile">
+                    <a href="cart.html">
+                        <i class="fal fa-shopping-bag"></i>
+                        <span class="quantity">@ViewBag.itemsInCart</span>
+                    </a>
+                    <i id="bar" class="fas fa-outdent"></i>
+                </div>
+            </div>
+            </div>
+    </section>
+    @* <section id="header">
+        <a href="#">
+            <a href="#"><img src="https://i.postimg.cc/x8ncvFjr/logo.png"></a>
+            </a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="/Shop/">Shop</a></li>
+                <li><a href="/Home/HomeTheme">Home Theme</a></li>
+                <li><a href="/Product/">Product</a></li>
+                <li><a href="/Category/">Category</a></li>
+                <li><a href="/Material/">Material</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <a href="cart.html" id="lg-bag"><i class="fal fa-shopping-bag"></i></a>
+                    <span class="quantity">0</span>
+                </li>
+                <li><a href="#" id="close"<i class="far fa-times"></i></a></li>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html">
+                <i class="fal fa-shopping-bag"></i>
+                <span class="quantity">0</span>
+            </a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section> *@
+    <div  style="padding-top: 80px;">
+            @RenderBody()
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script src="~/js/main.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="~/js/core/popper.min.js"></script>
+    <script src="~/js/core/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js" integrity="sha512-k/KAe4Yff9EUdYI5/IAHlwUswqeipP+Cp5qnrsUjTPCgl51La2/JhyyjNciztD7mWNKLSXci48m7cctATKfLlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Moment JS -->
+    <script src="~/js/plugin/moment/moment.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="~/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="~/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- Bootstrap Toggle -->
+    <script src="~/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
+    <!-- DateTimePicker -->
+    <script src="~/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
+
+    <!-- jQuery Validation -->
+    <script src="~/js/plugin/jquery.validate/jquery.validate.min.js"></script>
+    <script src="~/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="~/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <!-- Sweet Alert -->
+    <script src="~/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <!-- Atlantis JS -->
+    <script src="~/js/atlantis.min.js"></script>
+
+    <!-- Atlantis DEMO methods, don't include it in your project! -->
+    <script src="~/js/setting-demo.js"></script>
+    <script src="~/js/demo.js"></script>
+</body>
+</html>

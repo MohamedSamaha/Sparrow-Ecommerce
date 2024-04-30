@@ -1,0 +1,233 @@
+﻿@using SparrowManagementSystem.Core.DTOs
+@model IEnumerable<CategoryDto>
+@{
+	ViewData["Title"] = "Index";
+}
+@*     <style>
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+
+            text-align: left;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+            input[type="submit"] {
+                background-color: #4caf50;
+                color: #fff;
+                cursor: pointer;
+            }
+
+                input[type="submit"]:hover {
+                    background-color: #45a049;
+                }
+    </style> *@
+<!-- Fonts and icons -->
+<script src="~/js/plugin/webfont/webfont.min.js"></script>
+<script>
+	WebFont.load({
+		google: { "families": ["Lato:300,400,700,900"] },
+		custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['../../assets/css/fonts.min.css'] },
+		active: function () {
+			sessionStorage.fonts = true;
+		}
+	});
+</script>
+
+<!-- CSS Files -->
+<link href="~/css/atlantis.min.css" rel="stylesheet" />
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/atlantis.css" rel="stylesheet" />
+
+
+
+
+
+<div class="card m-4">
+	<div class="card-header">
+		<div class="d-flex align-items-center">
+			<h4 class="card-title">Add Category</h4>
+			<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+				<i class="fa fa-plus"></i>
+				Add Category
+			</button>
+		</div>
+	</div>
+	<div class="card-body">
+		<!-- Add Modal -->
+		<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header border-0">
+						<h5 class="modal-title">
+							<span class="fw-mediumbold">
+								Add
+							</span>
+							<span class="fw-light">
+								New
+							</span>
+							<span class="fw-light">
+								Category
+							</span>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p class="small">Create a new category and make sure to fill all the fields below</p>
+						<form>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group form-group-default">
+										<label>Name</label>
+										<input required id="categoryNameId" type="text" class="form-control" placeholder="fill category name">
+									</div>
+								</div>
+								<div class="col-md-6 pr-0">
+									<div class="form-group form-group-default">
+										<label>Type</label>
+										<input required id="categoryTypeId" type="text" class="form-control" placeholder="fill category type">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group form-group-default">
+										<label>Description</label>
+										<input required id="categoryDescriptionId" type="text" class="form-control" placeholder="category description">
+									</div>
+								</div>
+								<div hidden class="alert alert-danger col-sm-12" role="alert" id="dangerAlert">
+									Please Fill All the Category Information!
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer border-0">
+						<button type="button" id="addRowButton" class="btn btn-primary" onclick="createCategory()">Add</button>
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+		<div class="table-responsive">
+			<table id="add-row" class="display table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Category Type</th>
+						<th>Category Name</th>
+						<th>Category Description</th>
+						<th style="width: 10%">Action</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Category Type</th>
+						<th>Category Name</th>
+						<th>Category Description</th>
+						<th>Action</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					@foreach (var category in Model)
+					{
+						<tr>
+							<td>@category.Type</td>
+							<td>@category.Name</td>
+							<td>@category.Description</td>
+							<td>
+								<!-- Edit Modal -->
+								<div class="modal fade" id="editRowModel-@category.Id" tabindex="-1" role="dialog" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header border-0">
+												<h5 class="modal-title">
+													<span class="fw-mediumbold">
+														Edit
+													</span>
+													<span class="fw-light">
+														Category
+													</span>
+												</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<p class="small">Edit category and make sure to fill all the fields below</p>
+												<form>
+													<div class="row">
+														<div class="col-sm-12">
+															<div class="form-group form-group-default">
+																<label>Name</label>
+																<input required id="categoryNameId-@category.Id" value="@category.Name" type="text" class="form-control" placeholder="fill category name">
+															</div>
+														</div>
+														<div class="col-md-6 pr-0">
+															<div class="form-group form-group-default">
+																<label>Type</label>
+																<input required id="categoryTypeId-@category.Id" value="@category.Type" type="text" class="form-control" placeholder="fill category type">
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="form-group form-group-default">
+																<label>Description</label>
+																<input required id="categoryDescriptionId-@category.Id" type="text" class="form-control" value="@category.Description" placeholder="category description">
+															</div>
+														</div>
+														<div hidden class="alert alert-danger col-sm-12" role="alert" id="dangerEditAlert">
+															Please Fill All the Category Information!
+														</div>
+													</div>
+												</form>
+											</div>
+											<div class="modal-footer border-0">
+												<button type="button" id="addRowButton" class="btn btn-primary" onclick="editCategory('@category.Id')">Edit</button>
+												<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="form-button-action">
+									<button type="button" data-toggle="modal" title="" class="btn btn-link btn-primary btn-lg" data-target="#editRowModel-@category.Id" data-original-title="Edit Task">
+										<i class="fa fa-edit"></i>
+									</button>
+									<button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" id="deletCategory-@category.Id" onclick="deleteCategoryFunc('@category.Id')" data-original-title="Remove">
+										<i class="fa fa-times"></i>
+									</button>
+								</div>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script src="~/js/category/script.js"></script>

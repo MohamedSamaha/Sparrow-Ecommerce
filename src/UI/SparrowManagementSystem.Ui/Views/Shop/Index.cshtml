@@ -1,0 +1,40 @@
+﻿@using SparrowManagementSystem.Core.DTOs
+
+@model IEnumerable<CategoryDto>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+    @foreach(var category in Model)
+    {
+        @if (category.productDtos.Count() > 0)
+        {
+            <section id="product1" class="section-p1">
+                <h2>@category.Name</h2>
+                <p>@category.Type</p>
+                <div class="pro-container">
+                    @foreach (var product in category.productDtos)
+                    {
+                        <div class="pro" onclick="window.location.href='/Product/Details/@product.Id'">
+                            <img src="/SparrowImageUploads/@product.ImageDtos.FirstOrDefault().ImageName" alt="">
+                            <div class="des">
+                                <span>@product.BrandName</span>
+                                <h5>@product.Name</h5>
+                                <div class="star">
+                                    @for (int i = 0; i < product.Rating.Value; i++)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                </div>
+                                <h4>$@product.UnitPrice</h4>
+                            </div>
+                            <a href=""><i class="fal fa-shopping-cart cart"></i></a>
+                        </div>
+                    }
+                </div>
+            </section>
+        }
+    
+    }

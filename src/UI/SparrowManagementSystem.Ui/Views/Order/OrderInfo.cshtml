@@ -1,0 +1,205 @@
+﻿@using SparrowManagementSystem.Ui.ViewModel
+@model OrderViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!-- Fonts and icons -->
+<script src="../../assets/js/plugin/webfont/webfont.min.js"></script>
+<script>
+	WebFont.load({
+		google: { "families": ["Lato:300,400,700,900"] },
+		custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['../../assets/css/fonts.min.css'] },
+		active: function () {
+			sessionStorage.fonts = true;
+		}
+	});
+</script>
+
+<!-- CSS Files -->
+<link href="~/css/atlantis.min.css" rel="stylesheet" />
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/atlantis.css" rel="stylesheet" />
+
+<div class="col-md-12">
+	<div class="card m-4">
+		<div class="card-header">
+			<div class="card-title">Submit Order</div>
+			<div class="card-category">Submit All Items in Shopping Cart <a href="https://jqueryvalidation.org/">jQuery Validate</a></div>
+		</div>
+		<form id="exampleValidation" asp-action="Create">
+			<div class="card-body">
+				<div class="form-group form-show-validation row">
+					<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Firstame </label>
+					<div class="col-lg-4 col-md-9 col-sm-8">
+						<input type="text" class="form-control" value="@Model.Firstame" disabled id="name" name="name">
+					</div>
+				</div>
+				<div class="form-group form-show-validation row">
+					<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Lastname </label>
+					<div class="col-lg-4 col-md-9 col-sm-8">
+						<input type="text" class="form-control" value="@Model.Lastname" disabled id="name" name="name">
+					</div>
+				</div>
+				<div class="form-group form-show-validation row">
+					<label for="username" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Email Address </label>
+					<div class="col-lg-4 col-md-9 col-sm-8">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="username-addon">@@</span>
+							</div>
+							<input type="text" class="form-control" placeholder="username" disabled value="@Model.Email" aria-label="username" aria-describedby="username-addon" id="username" name="username">
+							
+						</div>
+					</div>
+				</div>
+				<div class="separator-solid"></div>
+
+				<div class="form-group form-show-validation row">
+					<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone Number 1 </label>
+					<div class="col-lg-4 col-md-9 col-sm-8">
+						<input type="number" class="form-control"  required id="name" name="phoneNomOne">
+					</div>
+				</div>
+				<div class="form-group form-show-validation row">
+					<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Phone Number 2 </label>
+					<div class="col-lg-4 col-md-9 col-sm-8">
+						<input type="number" class="form-control" required id="name1" name="phoneNomTwo">
+					</div>
+				</div>
+				
+
+				<div class="form-group form-show-validation row">
+					<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Address 1 </label>
+					<div class="col-lg-4 col-md-9 col-sm-8">
+						<input type="text" class="form-control" required id="name3" name="addressOne">
+					</div>
+				</div>
+
+				<div class="form-group form-show-validation row">
+					<label for="name" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Address 2 </label>
+					<div class="col-lg-4 col-md-9 col-sm-8">
+						<input type="text" class="form-control" required id="name4" name="addressTwo">
+					</div>
+				</div>
+				
+				<div class="form-group form-show-validation row">
+					<label for="birth" class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">City </label>
+					<div class="col-lg-4 col-md-9 col-sm-8">
+						<div class="select2-input">
+							<select id="state" name="city" class="form-control" required>
+								<option value="">&nbsp;</option>
+								<optgroup label="Governments">
+									<option value="Cairo">Cairo</option>
+									<option value="Giza">Giza</option>
+								</optgroup>
+								
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-check">
+					<div class="row">
+						<label class="col-lg-3 col-md-3 col-sm-4 mt-sm-2 text-right">Agree <span class="required-label">*</span></label>
+						<div class="col-lg-4 col-md-9 col-sm-8 d-flex align-items-center">
+							<div class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input" id="agree" name="agree" required>
+								<label class="custom-control-label" for="agree">Agree with terms and conditions</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-action">
+				<div class="row">
+					<div class="col-md-12">
+						<input class="btn btn-success" onclick="triggerSwal()" type="submit" value="Submit Order">
+						<button class="btn btn-danger" onclick="window.location.href='/Shop/'">Cancel Order</button>
+					</div>										
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+
+	<script>
+
+		function triggerSwal(){
+			swal("Order Successfully Submitted", {
+				icon: "success",
+				buttons: {
+					confirm: {
+						className: 'btn btn-success'
+					}
+				},
+			});
+		}
+	</script>
+
+<!--   Core JS Files   -->
+<script src="../../assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="../../assets/js/core/popper.min.js"></script>
+<script src="../../assets/js/core/bootstrap.min.js"></script>
+<!-- jQuery UI -->
+<script src="../../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="../../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+<!-- Moment JS -->
+<script src="../../assets/js/plugin/moment/moment.min.js"></script>
+<!-- Bootstrap Toggle -->
+<script src="../../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+<!-- jQuery Scrollbar -->
+<script src="../../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!-- DateTimePicker -->
+<script src="../../assets/js/plugin/datepicker/bootstrap-datetimepicker.min.js"></script>
+<!-- Select2 -->
+<script src="../../assets/js/plugin/select2/select2.full.min.js"></script>
+<!-- jQuery Validation -->
+<script src="../../assets/js/plugin/jquery.validate/jquery.validate.min.js"></script>
+<!-- Atlantis JS -->
+<script src="../../assets/js/atlantis.min.js"></script>
+<!-- Atlantis DEMO methods, don't include it in your project! -->
+<script src="../../assets/js/setting-demo2.js"></script>
+<script>
+	$('#birth').datetimepicker({
+		format: 'MM/DD/YYYY'
+	});
+
+	$('#state').select2({
+		theme: "bootstrap"
+	});
+
+	/* validate */
+
+	// validation when select change
+	$("#state").change(function () {
+		$(this).valid();
+	})
+
+	// validation when inputfile change
+	$("#uploadImg").on("change", function () {
+		$(this).parent('form').validate();
+	})
+
+	$("#exampleValidation").validate({
+		validClass: "success",
+		rules: {
+			gender: { required: true },
+			confirmpassword: {
+				equalTo: "#password"
+			},
+			birth: {
+				date: true
+			},
+			uploadImg: {
+				required: true,
+			},
+		},
+		highlight: function (element) {
+			$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		},
+		success: function (element) {
+			$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+		},
+	});
+</script>

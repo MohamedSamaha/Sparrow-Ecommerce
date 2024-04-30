@@ -1,0 +1,198 @@
+﻿@using SparrowManagementSystem.Core.DTOs
+@model IEnumerable<AppThemeDto>
+@{
+	ViewData["Title"] = "Home Edit Theme";
+}
+
+<!-- Fonts and icons -->
+<script src="../../assets/js/plugin/webfont/webfont.min.js"></script>
+<script>
+	WebFont.load({
+		google: { "families": ["Lato:300,400,700,900"] },
+		custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['../../assets/css/fonts.min.css'] },
+		active: function () {
+			sessionStorage.fonts = true;
+		}
+	});
+</script>
+
+<!-- CSS Files -->
+<link href="~/css/atlantis.min.css" rel="stylesheet" />
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/atlantis.css" rel="stylesheet" />
+<link href="~/css/demo.css" rel="stylesheet" />
+
+<div class="card m-4">
+	<div class="card-header">
+		<div class="d-flex align-items-center">
+			<h4 class="card-title">Add Category</h4>
+			<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+				<i class="fa fa-plus"></i>
+				Add Category
+			</button>
+		</div>
+	</div>
+	<div class="card-body">
+		<!-- Add Modal -->
+		<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header border-0">
+						<h5 class="modal-title">
+							<span class="fw-mediumbold">
+								Add
+							</span>
+							<span class="fw-light">
+								New
+							</span>
+							<span class="fw-light">
+								Theme
+							</span>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p class="small">Create a new App Theme and make sure to fill all the fields below</p>
+						<form enctype="multipart/form-data" asp-action="AddHomeTheme">
+							<div class="row">
+
+
+
+
+								<div class="col-sm-12">
+									<div class="form-group form-group-default">
+										<label>SubTitle</label>
+										<input required id="themeSubTitleId" type="text" name="subtitle" class="form-control" placeholder="fill Theme SubTitle">
+									</div>
+								</div>
+								<div class="col-md-6 pr-0">
+									<div class="form-group form-group-default">
+										<label>Title</label>
+										<input required id="themeTitleId" type="text" name="title" class="form-control" placeholder="fill Theme Title">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group form-group-default">
+										<label>Main Title</label>
+										<input required id="themeMainTitleId" type="text" name="mainTitle" class="form-control" placeholder="theme main title">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group form-group-default">
+										<label>Highlight</label>
+										<input required id="themeHighLightId" type="text" name="highLight" class="form-control" placeholder="theme highlight">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group form-group-default">
+										<label>Color</label>
+										<input required id="themeColorId" type="color" name="logoColor" class="form-control" placeholder="theme Color">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group form-group-default">
+										<label>Home Theme Image</label>
+										<input required id="homeThemeImageId" name="homeImage" type="file" class="form-control" accept="image/*" placeholder="Home Image">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group form-group-default">
+										<label>Logo Image</label>
+										<input required id="logoImageId" name="logoImage" type="file" class="form-control" accept="image/*" placeholder="Logo Image">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="agree" name="setState" value="true">
+										<label class="custom-control-label" for="agree">Set As The Current Theme</label>
+									</div>
+								</div>
+
+
+
+
+								<div hidden class="alert alert-danger col-sm-12" role="alert" id="dangerAlert">
+									Please Fill All the Themes Information!
+								</div>
+							</div>
+							<div class="modal-footer border-0">
+								<button type="submit" id="addRowButton" class="btn btn-primary">Add</button>
+								<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							</div>
+						</form>
+					</div>
+					
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+		<div class="table-responsive">
+			<table id="add-row" class="display table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>SubTitle</th>
+						<th>Title</th>
+						<th>MainTitle</th>
+						<th>HighLight</th>
+						<th style="width: 10%">Action</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>SubTitle</th>
+						<th>Title</th>
+						<th>MainTitle</th>
+						<th>HighLight</th>
+						<th>Action</th>
+					</tr>
+				</tfoot>
+				<tbody>
+					@foreach (var appTheme in Model)
+					{
+						<tr>
+							<td>@appTheme.SubTitle</td>
+							<td>@appTheme.Title</td>
+							<td>@appTheme.MainTitle</td>
+							<td>@appTheme.HighLight</td>
+							<td>
+								
+								<div class="form-button-action">
+									
+									<button type="button" class="m-2 btn btn-success" onclick="editThemeFunc('@appTheme.Id')">Set Theme</button>
+									
+								</div>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<!--   Core JS Files   -->
+<script src="../../assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="../../assets/js/core/popper.min.js"></script>
+<script src="../../assets/js/core/bootstrap.min.js"></script>
+<!-- jQuery UI -->
+<script src="../../assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="../../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+<!-- Bootstrap Toggle -->
+<script src="../../assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+<!-- jQuery Scrollbar -->
+<script src="../../assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<!-- Datatables -->
+<script src="../../assets/js/plugin/datatables/datatables.min.js"></script>
+<!-- Atlantis JS -->
+<script src="../../assets/js/atlantis.min.js"></script>
+<!-- Atlantis DEMO methods, don't include it in your project! -->
+<script src="../../assets/js/setting-demo2.js"></script>
+
+<script src="~/js/homepage/script.js"></script>
