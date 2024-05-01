@@ -49,3 +49,4 @@ D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSyst
 D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.Infrastructure\obj\Debug\net7.0\SparrowManagementSystem.Infrastructure.pdb
 D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.Infrastructure\obj\Debug\net7.0\SparrowManagementSystem.Infrastructure.genruntimeconfig.cache
 D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.Infrastructure\obj\Debug\net7.0\ref\SparrowManagementSystem.Infrastructure.dll
+D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.Infrastructure\obj\Debug\net7.0\SparrowManagementSystem.Infrastructure.sourcelink.json

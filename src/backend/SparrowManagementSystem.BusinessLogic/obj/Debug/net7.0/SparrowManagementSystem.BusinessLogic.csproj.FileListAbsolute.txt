@@ -35,3 +35,4 @@ D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSyst
 D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.BusinessLogic\obj\Debug\net7.0\refint\SparrowManagementSystem.BusinessLogic.dll
 D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.BusinessLogic\obj\Debug\net7.0\SparrowManagementSystem.BusinessLogic.pdb
 D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.BusinessLogic\obj\Debug\net7.0\ref\SparrowManagementSystem.BusinessLogic.dll
+D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.BusinessLogic\obj\Debug\net7.0\SparrowManagementSystem.BusinessLogic.sourcelink.json

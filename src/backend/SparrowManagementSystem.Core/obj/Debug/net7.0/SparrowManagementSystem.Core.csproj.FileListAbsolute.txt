@@ -33,3 +33,4 @@ D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSyst
 D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.Core\obj\Debug\net7.0\refint\SparrowManagementSystem.Core.dll
 D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.Core\obj\Debug\net7.0\SparrowManagementSystem.Core.pdb
 D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.Core\obj\Debug\net7.0\ref\SparrowManagementSystem.Core.dll
+D:\Development\My_Own_Projects\Sparrow_Project\src\backend\SparrowManagementSystem.Core\obj\Debug\net7.0\SparrowManagementSystem.Core.sourcelink.json

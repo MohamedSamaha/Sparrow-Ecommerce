@@ -627,3 +627,4 @@ D:\Development\My_Own_Projects\Sparrow_Project\src\UI\SparrowManagementSystem.Ui
 D:\Development\My_Own_Projects\Sparrow_Project\src\UI\SparrowManagementSystem.Ui\obj\Debug\net7.0\SparrowManagementSystem.Ui.pdb
 D:\Development\My_Own_Projects\Sparrow_Project\src\UI\SparrowManagementSystem.Ui\obj\Debug\net7.0\SparrowManagementSystem.Ui.genruntimeconfig.cache
 D:\Development\My_Own_Projects\Sparrow_Project\src\UI\SparrowManagementSystem.Ui\obj\Debug\net7.0\ref\SparrowManagementSystem.Ui.dll
+D:\Development\My_Own_Projects\Sparrow_Project\src\UI\SparrowManagementSystem.Ui\obj\Debug\net7.0\SparrowManagementSystem.Ui.sourcelink.json
